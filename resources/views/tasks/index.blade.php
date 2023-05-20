@@ -1,13 +1,13 @@
 <x-app-layout>
   <div class="flex justify-center">
-    <div class="max-w-lg mx-auto mt-6 p-6 bg-white shadow-md rounded-md">
-      <form action="#" class="mb-4">
+    <div class="w-3/4 mx-auto mt-6 p-6 bg-white shadow-md rounded-md">
+      <form action="{{ route('tasks.index') }}" class="mb-4">
         <div class="flex space-x-2 mb-2">
-          <input type="text" name="search" placeholder="検索" class="flex-1 border rounded-md p-2">
-          <select name="category" class="border rounded-md p-2 ml-2">
-            <option>カテゴリ</option>
+          <input type="text" name="keyword" placeholder="検索" class="flex-1 border rounded-md p-2">
+          <select name="category_id" class="border rounded-md ml-2">
+            <option value="">カテゴリー</option>
             @foreach ($categories as $category)
-            <option name="{{ $category->name }}" id="{{ $category->id }}">{{ $category->name }}</option>
+            <option value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach
           </select>
           <x-primary-button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md ml-2">検索</x-primary-button>
