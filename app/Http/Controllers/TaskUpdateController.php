@@ -13,7 +13,7 @@ class TaskUpdateController extends Controller
         $task = Task::find($id);
         $task->title = $request->input('title');
         $task->body = $request->input('body');
-        $task->category_id = $request->input('category');
+        $task->category_id = $request->input('category_id');
         $task->save();
 
         return redirect()->route('tasks.show', ['id' => $task->id]);
