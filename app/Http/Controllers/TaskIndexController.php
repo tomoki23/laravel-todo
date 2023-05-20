@@ -14,6 +14,7 @@ class TaskIndexController extends Controller
         $categoryId = $request->category_id;
 
         $tasks = Task::searchTasks($keyword, $categoryId);
+        $tasks->appends(['keyword' => $keyword, 'category_id' => $categoryId]);
 
         $categories = Category::all();
 
