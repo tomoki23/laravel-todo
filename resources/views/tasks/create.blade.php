@@ -1,12 +1,14 @@
 <x-app-layout>
   <div class="flex flex-col items-center">
-    <form action="#" class="max-w-lg mx-auto mt-6 p-6 bg-white shadow-md rounded-md">
+    <form action="{{ route('tasks.store') }}" method="POST" class="max-w-lg mx-auto mt-6 p-6 bg-white shadow-md rounded-md">
+      @csrf
       <div class="mb-4">
         <label for="title">タイトル</label>
         <select name="category" class="w-32">
           <option>カテゴリー</option>
-          <option value="カテゴリー">カテゴリー</option>
-          <option value="カテゴリー">カテゴリー</option>
+          @foreach ($categories as $category)
+            <option name="{{ $category->name }}" value="{{ $category->id }}">{{ $category->name }}</option>
+          @endforeach
         </select>
       </div>
       <div class="mb-4">
