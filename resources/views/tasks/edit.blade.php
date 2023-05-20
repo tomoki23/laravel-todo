@@ -5,19 +5,24 @@
       @method('PUT')
       <div class="mb-4">
         <label for="title">タイトル</label>
-        <select name="category" class="w-32">
-          <option>カテゴリー</option>
+        <select name="category_id" class="w-32">
           @foreach ($categories as $category)
-          <option name="{{ $category->name }}" value="{{ $category->id }}"{{ $category->name == $task->category->name ? 'selected' : '' }}>{{ $category->name }}</option>
+          <option value="{{ $category->id }}"{{ $category->name == $task->category->name ? 'selected' : '' }}>{{ $category->name }}</option>
           @endforeach
         </select>
       </div>
       <div class="mb-4">
         <input type="text" name="title" id="title" class="w-full" value="{{ $task->title }}">
+        @error('title')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
       </div>
       <div class="mb-4">
         <label for="body">本文</label>
         <input type="text" name="body" id="body" class="w-full" value="{{ $task->body }}">
+        @error('body')
+          <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
       </div>
       <div class="flex justify-center">
         <x-primary-button>更新</x-primary-button>
