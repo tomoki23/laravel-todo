@@ -12,13 +12,13 @@ class TaskStoreController extends Controller
         $user = $request->user();
         $title = $request->input('title');
         $body = $request->input('body');
-        $category = $request->input('category');
+        $categoryId = $request->input('category_id');
 
         Task::create([
             'user_id' => $user->id,
             'title' => $title,
             'body' => $body,
-            'category_id' => $category
+            'category_id' => $categoryId
         ]);
 
         return redirect()->route('tasks.index');
