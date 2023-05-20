@@ -15,10 +15,10 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('tasks.create')" :active="request()->routeIs('dashboard')">
                         TODO登録
                     </x-nav-link>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('tasks.index')" :active="request()->routeIs('dashboard')">
                         TODO一覧
                     </x-nav-link>
                 </div>
@@ -76,10 +76,10 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('tasks.create')" :active="request()->routeIs('dashboard')">
                 TODO登録
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('tasks.index')" :active="request()->routeIs('dashboard')">
                 TODO一覧
             </x-responsive-nav-link>
         </div>
