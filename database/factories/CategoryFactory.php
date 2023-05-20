@@ -17,8 +17,11 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
+        $id = $this->faker->unique()->randomElement([1, 2]);
+        $name = ($id == 1) ? '仕事' : 'プライベート';
+
         return [
-            'name' => fake()->name(),
+            'name' => $name,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
