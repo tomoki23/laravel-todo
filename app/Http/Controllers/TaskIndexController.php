@@ -10,7 +10,7 @@ class TaskIndexController extends Controller
 {
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::orderBy('created_at', 'desc')->paginate(10);
         $categories = Category::all();
 
         return view('tasks.index', compact('tasks', 'categories'));
