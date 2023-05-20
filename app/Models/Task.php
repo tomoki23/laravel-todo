@@ -26,4 +26,18 @@ class Task extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public static function searchTasks($keyword,$categoryId) {
+        if ($keyword) {
+            $tasks = Task::where('title', 'like', '%' . $keyword . '%')->orWhere('body', 'like', '%' . $keyword . '%')->paginate(10);
+        } else if ($categoryId) {
+            $tasks = Task::where('category_id', $categoryId)->orderBy('created_at', 'desc')->paginate(10);
+        } else if ($keyword && $categoryId) {
+            $tasks = Task::where('category_id', '=', $categoryId)->where('title', '%' . $keyword . '%')->orwhere('body', 'like', '%' . $keyword . '%')->paginate(10);
+        } else {
+            $tasks = Task::orderBy('created_at', 'desc')->paginate(10);
+        }
+
+        return $tasks;
+    }
 }
