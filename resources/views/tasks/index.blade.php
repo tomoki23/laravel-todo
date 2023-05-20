@@ -29,10 +29,11 @@
         @endforeach
 
       </table>
+      {{ $tasks->links() }}
     </div>
   </div>
-
+{{--
   <div class="flex justify-center mt-6">
     <a href="#" class="px-4 py-2 text-blue-500 border border-blue-500 rounded-md">←12345→</a>
-  </div>
+  </div> --}}
 </x-app-layout>
