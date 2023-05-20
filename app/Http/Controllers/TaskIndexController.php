@@ -8,9 +8,13 @@ use Illuminate\Http\Request;
 
 class TaskIndexController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::orderBy('created_at', 'desc')->paginate(10);
+        $keyword = $request->keyword;
+        $categoryId = $request->category_id;
+
+        $tasks = Task::searchTasks($keyword, $categoryId);
+
         $categories = Category::all();
 
         return view('tasks.index', compact('tasks', 'categories'));
