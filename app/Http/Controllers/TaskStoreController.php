@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateTaskRequest;
 use App\Models\Task;
 
 class TaskStoreController extends Controller
 {
-    public function store(Request $request)
+    public function store(CreateTaskRequest $request)
     {
         $user = $request->user();
         $title = $request->input('title');
