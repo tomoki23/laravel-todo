@@ -6,8 +6,9 @@
           <input type="text" name="search" placeholder="検索" class="flex-1 border rounded-md p-2">
           <select name="category" class="border rounded-md p-2 ml-2">
             <option>カテゴリ</option>
-            <option value="カテゴリー1">カテゴリー1</option>
-            <option value="カテゴリー2">カテゴリー2</option>
+            @foreach ($categories as $category)
+            <option name="{{ $category->name }}" id="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
           </select>
           <x-primary-button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md ml-2">検索</x-primary-button>
         </div>
@@ -15,21 +16,18 @@
 
       <table class="w-full border">
         <tr>
-          <th class="py-2 border">タイトル</th>
-          <th class="py-2 border">本文</th>
+          <th class="py-2 border p-4">タイトル</th>
+          <th class="py-2 border p-4">本文</th>
+          <th class="py-2 border p-4">操作</th>
         </tr>
-        <tr>
-          <td class="py-2 border">タイトル</td>
-          <td class="py-2 border">あああああ</td>
-        </tr>
-        <tr>
-          <td class="py-2 border">タイトル</td>
-          <td class="py-2 border">あああああ</td>
-        </tr>
-        <tr>
-          <td class="py-2 border">タイトル</td>
-          <td class="py-2 border">あああああ</td>
-        </tr>
+        @foreach ($tasks as $task)
+          <tr>
+            <th class="py-2 border p-4">{{ $task->title }}</th>
+            <th class="py-2 border p-4">{{ $task->body }}</th>
+            <th class="py-2 border p-4"><x-secondary-button><a href="{{ route('tasks.show', ['id' => $task->id]) }}">詳細</a></x-secondary-button></th>
+          </tr>
+        @endforeach
+
       </table>
     </div>
   </div>
