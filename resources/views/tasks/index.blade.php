@@ -18,12 +18,14 @@
         <tr>
           <th class="py-2 border p-4">タイトル</th>
           <th class="py-2 border p-4">本文</th>
+          <th class="py-2 border p-4">カテゴリー</th>
           <th class="py-2 border p-4">操作</th>
         </tr>
         @foreach ($tasks as $task)
           <tr>
             <th class="py-2 border p-4">{{ $task->title }}</th>
             <th class="py-2 border p-4">{{ $task->body }}</th>
+            <th class="py-2 border p-4">{{ $task->category->name }}</th>
             <th class="py-2 border p-4"><x-secondary-button><a href="{{ route('tasks.show', ['id' => $task->id]) }}">詳細</a></x-secondary-button></th>
           </tr>
         @endforeach
@@ -32,8 +34,4 @@
       {{ $tasks->appends(['keyword' => request('keyword'), 'category_id' => request('category_id')])->links() }}
     </div>
   </div>
-{{--
-  <div class="flex justify-center mt-6">
-    <a href="#" class="px-4 py-2 text-blue-500 border border-blue-500 rounded-md">←12345→</a>
-  </div> --}}
 </x-app-layout>
