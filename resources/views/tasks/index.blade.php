@@ -31,7 +31,7 @@
         @endforeach
 
       </table>
-      {{ $tasks->appends(['keyword' => request('keyword'), 'category_id' => request('category_id')])->links() }}
+      {{ $tasks->links() }}
     </div>
   </div>
 </x-app-layout>
