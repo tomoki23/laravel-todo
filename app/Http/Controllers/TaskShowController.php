@@ -8,7 +8,7 @@ class TaskShowController extends Controller
 {
     public function show($id)
     {
-        $task = Task::find($id);
+        $task = Task::with('category')->find($id);
 
         return view('tasks.show', compact('task'));
     }

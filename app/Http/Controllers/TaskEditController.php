@@ -9,7 +9,7 @@ class TaskEditController extends Controller
 {
     public function edit($id)
     {
-        $task = Task::find($id);
+        $task = Task::with('category')->find($id);
         $categories = Category::all();
 
         return view('tasks.edit', compact('task', 'categories'));
