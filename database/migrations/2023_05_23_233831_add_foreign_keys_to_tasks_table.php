@@ -12,8 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->change();
-            $table->unsignedBigInteger('category_id')->change();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('category_id')->references('id')->on('categories');
         });
@@ -25,8 +23,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->change();
-            $table->unsignedBigInteger('category_id')->change();
             $table->dropForeign(['user_id']);
             $table->dropForeign(['category_id']);
         });
