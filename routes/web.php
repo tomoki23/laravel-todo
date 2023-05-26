@@ -30,16 +30,22 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/tasks', [TaskIndexController::class, 'index'])->name('tasks.index');
-    Route::get('/tasks/create', [TaskCreateController::class, 'create'])->name('tasks.create');
-    Route::post('/tasks', [TaskStoreController::class, 'store'])->name('tasks.store');
-    Route::get('/tasks/{id}', [TaskShowController::class, 'show'])->name('tasks.show');
-    Route::get('/tasks/{id}/edit', [TaskEditController::class, 'edit'])->name('tasks.edit');
-    Route::put('/tasks/{id}/update', [TaskUpdateController::class, 'update'])->name('tasks.update');
-    Route::delete('/tasks/{id}/delete', [TaskDeleteController::class, 'destroy'])->name('tasks.delete');
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'edit'])->name('edit');
+        Route::patch('/', [ProfileController::class, 'update'])->name('update');
+        Route::delete('/', [ProfileController::class, 'destroy'])->name('destroy');
+    });
+    Route::prefix('tasks')->name('tasks.')->group(function () {
+        Route::get('', [TaskIndexController::class, 'index'])->name('index');
+        Route::get('/create', [TaskCreateController::class, 'create'])->name('create');
+        Route::post('/', [TaskStoreController::class, 'store'])->name('store');
+        Route::prefix('/{id}')->group(function () {
+            Route::get('/', [TaskShowController::class, 'show'])->name('show');
+            Route::get('/edit', [TaskEditController::class, 'edit'])->name('edit');
+            Route::put('/update', [TaskUpdateController::class, 'update'])->name('update');
+            Route::delete('/delete', [TaskDeleteController::class, 'destroy'])->name('delete');
+        });
+    });
 });
 
 
