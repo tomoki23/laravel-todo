@@ -30,28 +30,15 @@ class Task extends Model
 
     public static function searchTasks($keyword, $categoryId)
     {
-        if ($keyword && $categoryId) {
-            $tasks = Task::where('category_id', '=', $categoryId)
-                ->where(function (Builder $query) use ($keyword) {
-                    $query->where('title', 'like', '%' . $keyword . '%')
-                        ->orWhere('body', 'like', '%' . $keyword . '%');
-                })
-                ->paginate(10);
-        } else if ($keyword) {
-            $tasks = Task::where('title', 'like', '%' . $keyword . '%')
-                ->orWhere(
-                    'body',
-                    'like',
-                    '%' . $keyword . '%'
-                )->paginate(10);
-        } else if ($categoryId) {
-            $tasks = Task::where('category_id', $categoryId)
-                ->orderBy('created_at', 'desc')
-                ->paginate(10);
-        } else {
-            $tasks = Task::orderBy('created_at', 'desc')
-                ->paginate(10);
-        }
+        $tasks = Task::when($keyword, function (Builder $query, $keyword) {
+            $query->where(function ($query) use ($keyword) {
+                $query->where('title', 'like', '%' . $keyword . '%')
+                    ->orWhere('body', 'like', '%' . $keyword . '%');
+            });
+        })->when($categoryId, function (Builder $query, $categoryId) {
+            $query->where('category_id', $categoryId);
+        })->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         return $tasks;
     }
